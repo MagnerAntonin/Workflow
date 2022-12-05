@@ -1,18 +1,36 @@
 # This is a basic workflow to help you get started with Actions
-name: nomworkflow
- # Controls when the workflow will run
+
+name: CI / CD
+
+# Controls when the workflow will run
 on:
- # Triggers the workflow on push or pull request events but only for the "nombranche" branch
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
- # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  nomjob:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
- # Steps represent a sequence of tasks that will be executed as part of the job
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
       - name: vérification
-        uses: actions/checkout@v3
- # Checks-out your repository under $GITHUB_WORKSPACE, so your 2 INTÉGRATION CONTINUE  job can access it
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
       - name: continous
-        run: echo 'workflow lancé'
+        run: echo echo 'workflow lancé'
+
+      # Runs test app
+      - name: intégration
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y nginx
+          ls -a
